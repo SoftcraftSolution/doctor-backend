@@ -72,43 +72,11 @@ const server = app.listen(port, () => {
 });
 
 // WebSocket server code
-const WebSocket = require('ws');
-const wss = new WebSocket.Server({ noServer: true });
 
-wss.on('connection', (ws) => {
-  console.log('WebSocket client connected');
-
-  // WebSocket message event handler
-  ws.on('message', (message) => {
-    console.log('Received message:', message);
-
-    // Example: Echo back the received message
-    ws.send('socket connected: ' + message);
-  });
 
   // WebSocket close event handler
-  ws.on('close', () => {
-    console.log('WebSocket client disconnected');
-  });
-});
 
-server.on('upgrade', function upgrade(request, socket, head) {
-  wss.handleUpgrade(request, socket, head, function done(ws) {
-    wss.emit('connection', ws, request);
-  });
-});
 
-// WebSocket client code
-const wsClient = new WebSocket(`wss://${process.env.VERCEL_URL}`);
 
-wsClient.on('open', function open() {
-  console.log('Connected to WebSocket server');
-});
 
-wsClient.on('message', function incoming(data) {
-  console.log('Received message from server:', data);
-});
 
-wsClient.on('close', function close() {
-  console.log('Disconnected from WebSocket server');
-});
