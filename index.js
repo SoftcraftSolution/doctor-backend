@@ -99,7 +99,7 @@ server.on('upgrade', function upgrade(request, socket, head) {
 });
 
 // WebSocket client code
-const wsClient = new WebSocket(`ws://localhost:${port}`);
+const wsClient = new WebSocket(`wss://${process.env.VERCEL_URL}`);
 
 wsClient.on('open', function open() {
   console.log('Connected to WebSocket server');
